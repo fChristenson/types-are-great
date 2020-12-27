@@ -35,7 +35,7 @@ export class IBanCode implements IIBanCode {
   constructor(code: string) {
     if (code.length !== 16) throw new Error("IBAN has to be 16 characters long");
 
-    if (/[\s-]/g.test(code)) throw new Error("IBAN can not contain s or -");
+    if (/[\s-]/g.test(code)) throw new Error("IBAN can not contain spaces or -");
   }
 }
 
@@ -65,7 +65,7 @@ export class ExportData implements IExportData {
 type ProviderName = string;
 type CurrentProviderCode = string;
 
-export const getCurrentProviderCode = (currentProvider: ProviderName): CurrentProviderCode => {
+const getCurrentProviderCode = (currentProvider: ProviderName): CurrentProviderCode => {
   const result: string | undefined = providerCodeMap.get(currentProvider);
 
   if (result === undefined) throw new Error(`Could not find code for ${currentProvider}`);
